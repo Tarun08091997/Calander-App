@@ -1,0 +1,53 @@
+.login_box{
+    
+    width : 300px;
+    height : 400px;
+    background-color:white;
+    border-radius:20px;
+    box-shadow:5px 5px 10px 1px black;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;       
+}
+
+.logo_image{
+    width:150px;
+    height:75px;
+    opacity : 1;
+}
+
+.user_dropdown{
+    padding-left:10px;
+    width:200px;
+}
+.password_input{
+    width:180px;
+    padding-left: 20px;
+}
+.user_dropdown , .password_input{
+    
+    height:40px;
+    font-size: 15px;
+    border:1px solid black;
+    border-radius: 10px;
+    
+}
+
+.login_btn{
+    width:100px;
+    height:50px;
+    font-size: 25px;
+    border:0px;
+    color: white;
+    border-radius: 30px;
+    background-color: steelblue;
+}
+
+.logo_image , .password_input, .user_dropdown, .login_btn{
+    margin-top: 25px;
+}

@@ -1,4 +1,5 @@
 const app = require('./app');
+const cors = require('cors')
 const {connectMongo }= require('./database/connectMongo')
 const loginRouter = require('./routers/loginRouter');
 const bodyParser = require('body-parser')
@@ -7,6 +8,7 @@ const home_router = require('./routers/homeRouter');
 //connect mongo
 connectMongo();
 
+app.use(cors());
 app.use(bodyParser.json());
 
 // Routers
