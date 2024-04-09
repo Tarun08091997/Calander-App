@@ -1,0 +1,91 @@
+.request-page-container{
+    display:flex;
+    flex-grow:1;
+    flex-direction:row;
+    width: 100vw;
+}
+
+.left-navbar{
+    width: 300px;
+    background-color: #3c3744;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.left-navbar *{
+    color: white;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.left-navbar *:hover{
+    cursor: pointer;
+}
+
+.right-content{
+    background-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.requestdiv{
+    background-color: white;
+    margin: 10px;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; 
+    border-radius: 20px;
+    border: 3px solid #3498db;
+    box-shadow: 3px 2px 3px 5px white;
+
+}
+.requestdiv *{
+    margin: 5px;
+}
+.requestdiv .row1 .school{
+    font-size: 20px;
+    margin-left: 40px;
+    font-weight: 600;
+}
+
+.requestdiv .row1 .event{
+    margin-left: 200px;
+    font-size: 20px;
+    color: red;
+    font-weight: 550;
+}
+.requestdiv .row2{
+    display: flex;
+    justify-content: space-around;
+}
+
+.requestdiv .row4{
+    display: flex;
+    justify-content: end;
+}
+
+.requestdiv .row4 *{
+    padding: 8px;
+    font-size: 13px;
+    border-radius: 5px;
+    border : none
+}
+
+.requestdiv .row4 .accept:hover{
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+.requestdiv .row4 .reject:hover{
+    background-color: red;
+    color: white;
+    cursor: pointer;
+}
+
+.requestdiv .row4 .remarks:hover{
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}

@@ -5,12 +5,14 @@ import FrontPageFooter from './components/pages/FrontPage/FrontPageFooter';
 import LoginPage from './components/pages/LoginPage/LoginPage'
 import RequestPage from './components/pages/createRequestPage/CreateRequestPage';
 import DropDownComponent from './components/pages/createRequestPage/DropDownComponent';
+import ShowRequestPage from './components/pages/showRequestPages/ShowRequestPage';
 function App() {
 
   const [loginClicked , setLoginClicked] = useState(false);
   return (
     <div className="App" style={
       {
+
         padding:0,
         margin:0,
         width:'100vw',
@@ -20,14 +22,14 @@ function App() {
         display:'flex',
         flexDirection:'column',
         justifyItems:'space-between',
-        alignItems:'center',
+        alignItems:'center'
+        
       }
     }>
-      <FrontPageNavBar  loginPopup= {(val) => setLoginClicked(val)}/>
-      {/* <FrontPageCalander /> */}
+      <FrontPageNavBar style={{flexShrink:0}}  loginPopup= {(val) => setLoginClicked(val)}/>
       {/* <RequestPage /> */}
-      
-      <FrontPageFooter />
+      <ShowRequestPage/>
+      <FrontPageFooter style={{flexShrink:0}}/>
       
       {loginClicked && <LoginPage loginPopup= {(val) => setLoginClicked(val)}/>} 
     </div>

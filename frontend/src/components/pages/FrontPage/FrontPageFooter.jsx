@@ -8,10 +8,11 @@ export default function FrontPageFooter() {
         height:'80px',
         fontFamily:'serif',
         color:'white',
-        alignContent:'center',
-        textAlign:'center',
         fontSize:'20px',
-        marginTop:'50px'
+        display:'flex',
+        flexShrink:0,
+        justifyContent: 'center', // Horizontally center the content
+        alignItems: 'center', // Vertically center the content
     }}>
         &copy; 2024 CT University. All rights reserved.
     </div>
