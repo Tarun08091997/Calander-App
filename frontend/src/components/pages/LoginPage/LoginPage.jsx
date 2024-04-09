@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import './loginpage.css' 
 import axios from 'axios';
+import Popup from '../../alerts/Popup';
 const logo = require('../../../images/CT_University_logo.png')
 
 
-export default function LoginPage() {
+export default function LoginPage({loginPopup}) {
   // States
   const [users,setUsers] = useState([]);
   const [selectedUser , setSelectedUser] = useState("")
   const [password , setPassword] = useState("");
+
+  const [count ,setCount] = useState("");
+
+  const [popmsg , setPopmsg] = useState(["",""]);
 
   // Functions
   const getUsers = async () =>{
@@ -17,12 +22,13 @@ export default function LoginPage() {
   }
 
   const handleClick= async ()=>{
+    setCount((prevCount) => prevCount+1);
     try{
-      if(selectedUser == ""){
-        alert("Select a user to login");
+      if(selectedUser === ""){
+        setPopmsg(["warning", "Select a user to login"]);
       }
       else if(password.length < 6){
-        alert("Password length should be greater than 6 chracters");
+        setPopmsg(["warning", "Password length should be greater than 6 chracters"]);
       }
       else{
         const response_login = await axios.post("http://localhost:4000/api/v1/login/submit",
@@ -30,14 +36,17 @@ export default function LoginPage() {
           username : selectedUser,
           password : password
         });
-  
+        setPopmsg(["success", "Login Successful"]);
+        loginPopup(false);
         console.log(response_login.data);
+
+        
       }
     }
     catch(error){
       if (error.response) {
         // Handle client errors (4xx status codes)
-        alert(error.response.data.message);
+        setPopmsg(["error", error.response.data.message]);
       } else if (error.request) {
         // The request was made but no response was received
         console.error('No response received:', error.request);
@@ -55,19 +64,21 @@ export default function LoginPage() {
     },[])
 
   return (
-    <div>
+    <div className='login-container'>
+      <Popup key={count} type={popmsg[0]} message = {popmsg[1]}/>
       <div className="login_box">
       
-      <img src={logo} alt='University Logo' className='logo_image' />
+        <img src={logo} alt='University Logo' className='logo_image' />
+        <div onClick={()=>loginPopup(false)}>X</div>
 
-      <select className='user_dropdown' onChange={(e) => setSelectedUser(e.target.value)}>
-            {users.map((user , index) => (
-                <option value={user.username} key={index}>{user.username}</option>
-            ))}
-      </select>
-      
-      <input type='text' className='password_input' onChange={e =>{setPassword(e.target.value)}}/>
-      <button className="login_btn" onClick={handleClick}>Login</button> 
+        <select className='user_dropdown' onChange={(e) => setSelectedUser(e.target.value)}>
+              {users.map((user , index) => (
+                  <option value={user.username} key={index}>{user.username}</option>
+              ))}
+        </select>
+        
+        <input type='text' className='password_input' onChange={e =>{setPassword(e.target.value)}}/>
+        <button className="login_btn" onClick={handleClick}>Login</button> 
       
 
       </div>

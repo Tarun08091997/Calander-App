@@ -1,5 +1,5 @@
 const userModel = require('../database/Models/userLoginModel');
-
+const jwt = require("jsonwebtoken");
 // CUDA 
 
 
@@ -172,7 +172,8 @@ exports.checkLogin = async (req,res,next) => {
             return res.status(404).send({ message: "User not found" });
         }
         if(login_user.password === b.password){
-            return res.status(200).send({ message: "User found" , user : login_user });
+            const token = await login_user.userAuthToken();
+            return res.status(200).send({ message: "User found" , userToken : token});
         }
         else{
             return res.status(400).send({ message: "Incorrect Password"});

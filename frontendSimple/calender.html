@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Event Calendar - CT Group</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/dist/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="calender.css">
+</head>
+
+<body class="bg-gray-100">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <div class="navbar-brand" href="#">
+                <img class="logo" src="https://ctuniversity.in/images/ct-logo.png" alt="blog" width="100%">
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 calendar-container">
+        <div class="calendar-header text-white">
+            <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold"
+                id="currentMonthYear"></h2>
+            <div class="calendar-buttons mt-2">
+                <button class="btn btn-light" onclick="prevMonth()">Previous Month</button>
+                <button class="btn btn-light" onclick="nextMonth()">Next Month</button>
+            </div>
+        </div>
+
+        <table class="table table-bordered calendar-table fade-in">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="text-center">Sun</th>
+                    <th class="text-center">Mon</th>
+                    <th class="text-center">Tue</th>
+                    <th class="text-center">Wed</th>
+                    <th class="text-center">Thu</th>
+                    <th class="text-center">Fri</th>
+                    <th class="text-center">Sat</th>
+                </tr>
+            </thead>
+            <tbody id="calendar-body"></tbody>
+        </table>
+    </div>
+    
+    <!-- footer starts here-->
+    <footer class="bg text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2024 CT University. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Bootstrap JS and Popper.js (required for Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="calender.js"></script>
+</body>
+
+</html>

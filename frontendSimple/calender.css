@@ -1,0 +1,107 @@
+:root {
+    --primary-color: #3498db; /* Blue */
+    --secondary-color: #2ecc71; /* Green */
+    --navbar-text: #ffffff; /* White */
+    --calendar-bg: #f0f0f0; /* Light Gray */
+    --calendar-header-bg: #3498db; /* Blue */
+    --calendar-border: #bdc3c7; /* Silver */
+}
+
+/* Add custom styles here if needed */
+.fade-in {
+    animation: fadeIn ease-in-out 0.5s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.calendar-container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 700px; /* Increased height for better visibility on mobile devices */
+    background-color: #ffffff;
+}
+
+.calendar-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--calendar-header-bg);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 0 0;
+    justify-content: space-between;
+}
+
+.calendar-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.calendar-table {
+    width: 100%;
+    height: 65%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+}
+
+.calendar-table th,
+.calendar-table td {
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+    background-color: var(--calendar-bg);
+    border: 1px solid var(--calendar-border);
+}
+
+.calendar-table th {
+    background-color: var(--calendar-header-bg);
+    color: var(--navbar-text);
+}
+
+.calendar-table td {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+.calendar-table td:hover {
+    background-color: #e9ecef;
+}
+
+.bi {
+    font-size: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    padding: 8px;
+    background-color: #ffffff;
+}
+
+/* Custom Navbar Colors */
+.navbar {
+    background-color: var(--primary-color);
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: var(--navbar-text);
+}
+.bg{
+    background-color: var(--primary-color);
+}
+

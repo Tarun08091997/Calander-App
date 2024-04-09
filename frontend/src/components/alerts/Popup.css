@@ -1,0 +1,24 @@
+.popup {
+    position: fixed;
+    right: 20px;
+    top:20px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border-width: 2px;
+    border-style: solid;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s;
+  }
+  
+.popup:hover {
+    background-color: rgba(255, 255, 255, 1);
+    cursor: pointer;
+}
+  
+.message {
+    margin-right: 10px;
+}
+  
+
+  

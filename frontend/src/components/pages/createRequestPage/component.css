@@ -1,0 +1,27 @@
+.selected-options-div{
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 3px 0 0 5px;
+    height: 25px;
+    font-size: 20px;
+    box-shadow: 3px 5px 6px 5px rgba(0, 0, 0, 0.3);
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.selected-options-div:hover{
+    cursor:pointer;
+    background-color: tomato;
+}
+
+.user_dropdown{
+  border: none;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 3px 5px 5px 5px;
+  height: 25px;
+  font-size: 20px;
+  box-shadow: 3px 5px 6px 5px rgba(0, 0, 0, 0.3);
+
+}

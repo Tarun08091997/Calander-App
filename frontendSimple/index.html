@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CT Group Login - Login as an event coordinator or guest to manage and participate in events.">
+    <meta name="keywords" content="CT Group, Event Coordinator Login, Guest Login, Event Management">
+    <meta name="author" content="Your Name">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>Event Calendar - CT Group</title>  
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            background: url(https://img.freepik.com/free-vector/bokeh-background-concept_23-2148474869.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            cursor: pointer;
+            width: 100%;
+            max-width: 400px;
+            margin: 15px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            color: #555555;
+            margin-bottom: 20px;
+        }
+
+        .btn-login {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            background-color: #007bff;
+            color: #ffffff;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Event Coordinator Login -->
+        <div class="card p-2">
+            <img src="https://thumbs.dreamstime.com/b/pen-calendar-note-pad-list-number-reminder-task-event-planning-concept-141176938.jpg?w=768" class="card-img-top" alt="Event Coordinator Image">
+            <div class="card-content">
+                <h5 class="card-title">Event Coordinator Login</h5>
+                <p class="card-description">Login as an event coordinator to manage and organize events. Access powerful tools and features to streamline event planning.</p>
+                <a href="Coodinatorlogin.html" class="btn-login">Login</a>
+            </div>
+        </div>
+
+        <!-- Guest Login -->
+        <div class="card p-2">
+            <img src="https://as1.ftcdn.net/v2/jpg/01/53/06/46/1000_F_153064674_Bh6KVxjOCLcqmwxGFnSKWppTRS4FnEBp.jpg" class="card-img-top" alt="Guest Image">
+            <div class="card-content">
+                <h5 class="card-title">Guest Login</h5>
+                <p class="card-description">Login as a guest to explore and participate in upcoming events. Discover exciting activities and register for your favorite events.</p>
+                <a href="GuestLogin.html" class="btn-login">Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 const mongo = require('mongoose');
-const cerReq = require('./requestModel')
+const jwt = require("jsonwebtoken");
 
 const loginSchema = mongo.Schema({
     'username':{
@@ -33,7 +33,23 @@ const loginSchema = mongo.Schema({
             type:mongo.Schema.Types.ObjectId,
             ref:'cerReq'
         }
+    ],
+    'tokens':[
+        {
+            token:{
+                type:String,
+                required:true
+            }
+        }
     ]
 });
 
+
+// Token genrate
+loginSchema.methods.userAuthToken = async function(){
+    let token = jwt.sign({_id:this._id},process.env.SECRET_KEY);
+    this.tokens = this.tokens.concat({token:token});
+    await this.save();
+    return token;
+}
 module.exports = mongo.model('User',loginSchema);
