@@ -5,10 +5,10 @@ export default function FrontPageFooter() {
     <div className="footer" style={{
         backgroundColor:'#3498db',
         width:'100vw',
-        height:'80px',
+        height:'40px',
         fontFamily:'serif',
         color:'white',
-        fontSize:'20px',
+        fontSize:'15px',
         display:'flex',
         flexShrink:0,
         justifyContent: 'center', // Horizontally center the content

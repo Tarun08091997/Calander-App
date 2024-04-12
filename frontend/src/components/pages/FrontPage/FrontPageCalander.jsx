@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 import './frontpagecalander.css'
+
+const CalanderDay=() =>{
+    return(
+        <div>
+            
+        </div>
+    )
+}
 const FrontPageCalander = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
 

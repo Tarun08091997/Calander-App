@@ -27,8 +27,7 @@ function App() {
       }
     }>
       <FrontPageNavBar style={{flexShrink:0}}  loginPopup= {(val) => setLoginClicked(val)}/>
-      {/* <RequestPage /> */}
-      <ShowRequestPage/>
+      <FrontPageCalander />      
       <FrontPageFooter style={{flexShrink:0}}/>
       
       {loginClicked && <LoginPage loginPopup= {(val) => setLoginClicked(val)}/>} 
