@@ -43,6 +43,18 @@ const requestSchema = mongo.Schema({
             ref : 'message'
         }
     ],
+    "coordinatorName":{
+        type: String
+    },
+    "CoordinatorNumber":{
+        type:String
+    },
+    "place":{
+        type:String
+    },
+    "vanue":{
+        type:String
+    },
     "saved":{
         type:Boolean,
         default: true

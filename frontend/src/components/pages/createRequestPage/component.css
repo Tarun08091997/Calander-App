@@ -16,11 +16,11 @@
 }
 
 .user_dropdown{
-  border: none;
+  border: 1px solid black;
   border-radius: 5px;
   padding: 3px;
-  margin: 3px 5px 5px 5px;
-  height: 25px;
+  margin: 15px 5px 5px 5px;
+  height: 30px;
   font-size: 20px;
   box-shadow: 3px 5px 6px 5px rgba(0, 0, 0, 0.3);
 

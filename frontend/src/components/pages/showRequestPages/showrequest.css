@@ -5,6 +5,15 @@
     width: 100vw;
 }
 
+/* Right Content */
+.right-content{
+    background-color: lightslategray;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Left NavBar */
 .left-navbar{
     width: 300px;
     background-color: #3c3744;
@@ -22,12 +31,17 @@
     cursor: pointer;
 }
 
-.right-content{
-    background-color: lightslategray;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+.request-page-container .left-navbar .active{
+    background-color: white;
+    color: black;
+    padding: 5px;
+    border-radius: 10px;
 }
+
+
+
+
+/* Div for Requests */
 .requestdiv{
     background-color: white;
     margin: 10px;
@@ -69,7 +83,8 @@
     padding: 8px;
     font-size: 13px;
     border-radius: 5px;
-    border : none
+    border : none;
+    background-color: #007bff;
 }
 
 .requestdiv .row4 .accept:hover{
@@ -89,3 +104,12 @@
     color: white;
     cursor: pointer;
 }
+
+.requestdiv .row4 .inactive{
+    background-color: gray;
+    color: white;
+    cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+    pointer-events: none;
+
+}
+

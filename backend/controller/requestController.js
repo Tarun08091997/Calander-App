@@ -2,34 +2,63 @@ const requestModel = require('../database/Models/requestModel')
 const userModel = require('../database/Models/userLoginModel');
 // CUDA
 
-// create
-exports.createReq = async (req,res,next) => {
-    try{
+exports.createReq = async (req, res, next) => {
+    try {
         const req_body = req.body;
-        req_body.from = req.params.username;
-        const new_req = await requestModel(req_body);
-        const from_user = await userModel.findOne({"username":req.params.username});
-        const to_user = await userModel.findOne({"username":req_body.to});
-        if(from_user === to_user){
-            return res.status(500).send({message : "can't send request to yourself"});
-        }
-        if(!to_user){
-            return res.status(404).send({message : "to_user not found"})
-        }
-        from_user.reqSent.push(new_req._id);
-        to_user.reqRec.push(new_req._id);
-        await new_req.save();
-        await from_user.save();
-        await to_user.save();
+        const fromUsername = req.params.username;
 
-        return res.status(200).send({message : "Request Created" , reqest : new_req});
-    }catch(err){
+        const fromUser = await userModel.findOne({ "username": fromUsername });
+        if (!fromUser) {
+            return res.status(404).send({ message: "From user not found" });
+        }
+
+        const toUsernames = req_body.to;
+        if (!toUsernames || !Array.isArray(toUsernames)) {
+            return res.status(400).send({ message: "Invalid 'to' field. Expected an array of usernames." });
+        }
+
+        const createdRequests = [];
+
+        for (const toUsername of toUsernames) {
+            if (fromUsername === toUsername) {
+                continue; // Skip sending request to oneself
+            }
+
+            const toUser = await userModel.findOne({ "username": toUsername });
+            if (!toUser) {
+                return res.status(404).send({ message: `User with username '${toUsername}' not found` });
+            }
+
+            const newReq = new requestModel({
+                ...req_body,
+                from: fromUsername,
+                to: toUsername
+            });
+
+            fromUser.reqSent.push(newReq._id);
+            toUser.reqRec.push(newReq._id);
+
+            await newReq.save();
+            await fromUser.save();
+            await toUser.save();
+
+            createdRequests.push(newReq);
+        }
+
+        if(createdRequests.length == 0){
+            return res.status(400).send({ message: "Fill Data Properly", requests: createdRequests });
+        }else{
+            return res.status(200).send({ message: "Requests Created", requests: createdRequests });
+        }
+    } catch (err) {
         res.status(500).send({
-            message: "Can't create request",
+            message: "Can't create requests",
             error: err.message
         });
     }
 }
+
+
 
 
 // Save
@@ -83,6 +112,35 @@ exports.updateRequest = async(req,res,next) =>{
     }
 }
 
+exports.acceptRequest = async (req,res,next) =>{
+    try{
+        const updatedRequest = await requestModel.findByIdAndUpdate(req.params.request , {reqStatus:'accepted'} , {new : true});
+        if(!updatedRequest){
+            return res.status(404).send({message : "Error while updating request"})
+        }
+        return res.status(200).send(updatedRequest);
+    }catch(err){
+        res.status(500).send({
+            message: "Failed to Accept request",
+            error: err.message
+        });
+    }
+}
+
+exports.rejectRequest = async (req,res,next) =>{
+    try{
+        const updatedRequest = await requestModel.findByIdAndUpdate(req.params.request , {reqStatus:'canceled'} , {new : true});
+        if(!updatedRequest){
+            return res.status(404).send({message : "Error while updating request"})
+        }
+        return res.status(200).send(updatedRequest);
+    }catch(err){
+        res.status(500).send({
+            message: "Failed to Reject request",
+            error: err.message
+        });
+    }
+}
 
 
 // Delete

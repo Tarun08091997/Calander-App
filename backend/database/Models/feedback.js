@@ -2,13 +2,14 @@ const mongo = require('mongoose');
 const requests = require('./requestModel')
 const feedbackSchema = new mongo.Schema({
     'comment':{
-        type : String
+        type : String,
+        required:true
     },
     'resDate':{
         type:Date,
         default:Date.now
     },
-    'request':{
+    'request_id':{
         type: mongo.Schema.Types.ObjectId,
         ref : 'requests'
     }

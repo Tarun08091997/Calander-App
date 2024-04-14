@@ -17,6 +17,8 @@ exports.getAllUsersData = async (req, res, next) => {
     }
 };
 
+
+
 exports.getAllUsernames = async (req,res,next) => {
     try{
         const data = await userModel.find({},"username");
@@ -29,6 +31,20 @@ exports.getAllUsernames = async (req,res,next) => {
         });
     }
 }
+
+exports.getAllAdminNames = async (req,res,next) => {
+    try{
+        const data = await userModel.find({'role':'admin'},"username");
+        res.status(200).send(data);
+
+    }catch(err){
+        res.status(500).send({
+            message: "Failed to retrieve users",
+            error: err.message
+        });
+    }
+}
+
 
 exports.getUserByUsernames = async (req,res,next) =>{
     try{
@@ -173,7 +189,7 @@ exports.checkLogin = async (req,res,next) => {
         }
         if(login_user.password === b.password){
             const token = await login_user.userAuthToken();
-            return res.status(200).send({ message: "User found" , userToken : token});
+            return res.status(200).send({ message: "User found" , userToken : token, user:login_user});
         }
         else{
             return res.status(400).send({ message: "Incorrect Password"});

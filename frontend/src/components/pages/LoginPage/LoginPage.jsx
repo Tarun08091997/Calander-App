@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './loginpage.css' 
 import axios from 'axios';
 import Popup from '../../alerts/Popup';
+import { UserContext } from '../../../contexts/UserContext';
 const logo = require('../../../images/CT_University_logo.png')
 
 
@@ -14,6 +15,7 @@ export default function LoginPage({loginPopup}) {
   const [count ,setCount] = useState("");
 
   const [popmsg , setPopmsg] = useState(["",""]);
+  const {loginUser,setLoginUser} = useContext(UserContext) 
 
   // Functions
   const getUsers = async () =>{
@@ -36,11 +38,9 @@ export default function LoginPage({loginPopup}) {
           username : selectedUser,
           password : password
         });
-        setPopmsg(["success", "Login Successful"]);
+        setPopmsg(["success", `Welcome ${selectedUser}`]);
         loginPopup(false);
-        console.log(response_login.data);
-
-        
+        setLoginUser({isLoggedIn:true , userInfo:response_login.data.user})
       }
     }
     catch(error){
@@ -62,6 +62,10 @@ export default function LoginPage({loginPopup}) {
     useEffect(()=>{
       getUsers();
     },[])
+
+    useEffect(()=>{
+      console.log(loginUser)
+    },[loginUser])
 
   return (
     <div className='login-container'>

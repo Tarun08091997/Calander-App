@@ -3,14 +3,17 @@ import React, { useEffect, useState } from 'react';
 import FrontPageCalander from './components/pages/FrontPage/FrontPageCalander';
 import FrontPageFooter from './components/pages/FrontPage/FrontPageFooter';
 import LoginPage from './components/pages/LoginPage/LoginPage'
-import RequestPage from './components/pages/createRequestPage/CreateRequestPage';
-import DropDownComponent from './components/pages/createRequestPage/DropDownComponent';
-import ShowRequestPage from './components/pages/showRequestPages/ShowRequestPage';
+import { UserProvider } from './contexts/UserContext';
+import ShowRequestPage from './components/pages/showRequestPages/ShowRequestPage'
+import CreateRequestPage from './components/pages/createRequestPage/CreateRequestPage'
+
 function App() {
 
   const [loginClicked , setLoginClicked] = useState(false);
+  const [pageName,setPageName] = useState("Home");
   return (
-    <div className="App" style={
+    <UserProvider>
+      <div className="App" style={
       {
 
         padding:0,
@@ -26,12 +29,19 @@ function App() {
         
       }
     }>
-      <FrontPageNavBar style={{flexShrink:0}}  loginPopup= {(val) => setLoginClicked(val)}/>
-      <FrontPageCalander />      
+      <FrontPageNavBar style={{flexShrink:0}}  loginPopup= {(val) => setLoginClicked(val)} setPageName = {setPageName}/>
+      {pageName === "Home" && <FrontPageCalander/> }
+      {pageName === "Requests" && <ShowRequestPage />}
+      {pageName === "CreateRequest" && <CreateRequestPage />}   
+         
       <FrontPageFooter style={{flexShrink:0}}/>
       
       {loginClicked && <LoginPage loginPopup= {(val) => setLoginClicked(val)}/>} 
+
     </div>
+    </UserProvider>
+
+    
   );
 }
 
