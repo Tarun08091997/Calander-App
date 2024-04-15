@@ -74,6 +74,10 @@
     justify-content: space-around;
 }
 
+.requestdiv .row1, .row2, .row3:hover{
+    cursor: pointer;
+}
+
 .requestdiv .row4{
     display: flex;
     justify-content: end;

@@ -12,6 +12,10 @@ const feedbackSchema = new mongo.Schema({
     'request_id':{
         type: mongo.Schema.Types.ObjectId,
         ref : 'requests'
+    },
+    'seen':{
+        type:Boolean,
+        default : false
     }
 });
 

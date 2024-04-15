@@ -1,0 +1,82 @@
+.full-request-container {
+    display: block;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.full-request-container .content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 50%;
+    max-width: 600px;
+    overflow-y: scroll;
+}
+
+.full-request-container .content .cross_btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.full-request-container .content .cross_btn:hover,
+.full-request-container .content .cross_btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    color: red;
+}
+
+.full-request-container .content h2 {
+    font-weight: bold;
+    color: black;
+}
+
+.request-details {
+    margin-top: 20px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.column p {
+    margin-top: 10px;
+}
+
+.message {
+    margin-top: 20px;
+}
+
+.message p {
+    margin: 0;
+}
+
+.showfeedback .ok-button {
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left:90%;
+}
+
+.showfeedback .ok-button:hover {
+    background-color: green;
+}

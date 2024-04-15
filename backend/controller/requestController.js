@@ -1,7 +1,6 @@
 const requestModel = require('../database/Models/requestModel')
 const userModel = require('../database/Models/userLoginModel');
 // CUDA
-
 exports.createReq = async (req, res, next) => {
     try {
         const req_body = req.body;
@@ -57,9 +56,6 @@ exports.createReq = async (req, res, next) => {
         });
     }
 }
-
-
-
 
 // Save
 exports.SaveReq = async (req,res,next) => {

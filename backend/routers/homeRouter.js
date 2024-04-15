@@ -1,4 +1,4 @@
-const { createFeedback } = require('../controller/feedbackController');
+const { createFeedback, getFeedback, feedbackSeen } = require('../controller/feedbackController');
 const { createReq, getAllRequests, SaveReq, deleteSavedRequest, acceptRequest, rejectRequest } = require('../controller/requestController');
 const { getUserSentRequests, getUserRecRequests, getUserSavedRequests } = require('../controller/userController');
 
@@ -12,4 +12,6 @@ home_router.route("/:username/SavedRequests").get(getUserSavedRequests).post(Sav
 home_router.route("/:request/AcceptRequest").put(acceptRequest);
 home_router.route("/:request/RejectRequest").put(rejectRequest);
 home_router.route("/:request/CreateFeedback").post(createFeedback);
+home_router.route("/:request/GetFeedback").get(getFeedback);
+home_router.route("/:feedback/FeedbackSeen").put(feedbackSeen);
 module.exports = home_router;

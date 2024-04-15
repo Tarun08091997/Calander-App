@@ -27,11 +27,13 @@ export default function SendFeedbackDiv({ request, setVisible , visible }) {
 
     const handleSend = async () => {
         try {
-          await axios.post(`http://localhost:4000/api/v1/${request}/`, {
+          const response = await axios.post(`http://localhost:4000/api/v1/${request}/CreateFeedback`, {
             comment: remark,
             resDate: new Date(),
             request_id: request
           });
+          setPopmsg(["success", response.data.message, popmsg[2] + 1]);
+          handleClose();
         } catch (error) {
           if (error.response) {
             // The request was made and the server responded with a status code
