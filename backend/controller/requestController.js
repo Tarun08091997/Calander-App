@@ -163,3 +163,39 @@ exports.deleteSavedRequest = async (req,res,next) =>{
         });
     }
 }
+
+
+exports.decreasePendingFeedback = async (req, res, next) => {
+    try {
+        const requestId = req.params.request;
+
+        // Validate request ID
+        if (!requestId) {
+            return res.status(400).send({ message: "Request ID is missing" });
+        }
+
+        // Find request by ID
+        const request = await requestModel.findById(requestId);
+
+        // Handle request not found
+        if (!request) {
+            return res.status(404).send({ message: "Request not found" });
+        }
+
+        // Update pendingFeedback count
+        request.pendingFeedback -= 1;
+        const updatedRequest = await requestModel.findByIdAndUpdate(requestId, { pendingFeedback: request.pendingFeedback }, { new: true });
+
+        // Handle update failure
+        if (!updatedRequest) {
+            return res.status(500).send({ message: "Failed to update request" });
+        }
+
+        // Send updated request in the response
+        return res.status(200).send(updatedRequest);
+    } catch (error) {
+        // Handle unexpected errors
+        console.error("Error in increasePendingFeedback:", error);
+        return res.status(500).send({ message: "Failed to update request", error: error.message });
+    }
+};

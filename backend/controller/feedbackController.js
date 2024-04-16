@@ -13,6 +13,7 @@ exports.createFeedback = async (req, res, next) => {
         if (!feedback) {
                 return res.status(400).send({ message: "Fill Data Properly" });
         }
+        request.pendingFeedback += 1;
         await feedback.save();
         await request.save();
         request.feedback.push(feedback._id);

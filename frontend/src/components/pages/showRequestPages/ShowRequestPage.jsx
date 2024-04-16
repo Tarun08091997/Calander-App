@@ -6,7 +6,7 @@ import { UserContext } from '../../../contexts/UserContext';
 export default function ShowRequestPage(){
   const [requests , setRequests] = useState([]); // Contain all the request to be shown
   
-  const {loginUser,setLoginUser} = useContext(UserContext);
+  const {loginUser} = useContext(UserContext);
   
   const [active,setActive] = useState('All Requests');
   const [btnclicked , setBtnClicked] = useState(false);  // Check if any btn is pressed in requestsDiv
@@ -70,7 +70,7 @@ export default function ShowRequestPage(){
           <RequestDiv
             key={request._id}
             request = {request}
-            user = {loginUser.userInfo.role}
+            userRole = {loginUser.userInfo.role}
             setBtnClicked = {setBtnClicked }
           />
         ))}

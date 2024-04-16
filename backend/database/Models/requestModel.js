@@ -58,6 +58,10 @@ const requestSchema = mongo.Schema({
     "saved":{
         type:Boolean,
         default: true
+    },
+    "pendingFeedback":{
+        type:Number,
+        default:0
     }
 });
 

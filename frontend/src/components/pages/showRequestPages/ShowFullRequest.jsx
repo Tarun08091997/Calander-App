@@ -2,9 +2,36 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import './showfullrequest.css';
 import { UserContext } from '../../../contexts/UserContext';
 import axios from 'axios'
+import Popup from '../../alerts/Popup';
 
-function ShowFeedback({ feedback }) {
-    const { loginUser } = useContext(UserContext);
+function ShowFeedback({ loginUser , feedback , getFeedbackData , req_id }) {
+    
+    const [popmsg , setPopmsg] = useState(["","",0]);
+
+    const handleOkbtn = async() => { 
+        try {
+            const response = await axios.put(`http://localhost:4000/api/v1/${feedback._id}/FeedbackSeen`);
+            await axios.put(`http://localhost:4000/api/v1/${req_id}/decreasePendingFeedback`);
+            setPopmsg(["success", response.data.message, popmsg[2] + 1]);
+            getFeedbackData();
+            // Handle response if needed
+          } catch (error) {
+            if (error.response) {
+              // The request was made and the server responded with a status code
+              // that falls out of the range of 2xx
+              const { data } = error.response;
+              const errorMessage = data.message;
+              setPopmsg(["warning", errorMessage, popmsg[2] + 1]);
+              // Handle error message
+            } else if (error.request) {
+              // The request was made but no response was received
+              console.log(error.request);
+            } else {
+              // Something happened in setting up the request that triggered an Error
+              console.log("Error", error.message);
+            }
+          }     
+    } 
 
     // Determine border and box shadow color based on feedback seen status
     const borderColor = feedback.seen ? 'green' : 'red';
@@ -17,14 +44,16 @@ function ShowFeedback({ feedback }) {
        
         <div className='showfeedback' style={{ width: '90%', border: `1px solid ${borderColor}`, borderRadius: '10px', boxShadow: `0 0 10px ${boxShadowColor}` ,minHeight:'20px'}}>
             <div className='feedback-message'>{feedback.comment}</div>
-            {true && (
-                <button className='ok-button' onClick={()=>{console.log(loginUser)}}>OK</button>
+            {showOkButton && (
+                <button className='ok-button' onClick={()=>{handleOkbtn()}}>OK</button>
             )}
+            <Popup key={popmsg[2]} type={popmsg[0]} message = {popmsg[1]}/>
         </div>
     );
 }
 
 export default function ShowFullRequest({ request, setVisible }) {
+    const { loginUser } = useContext(UserContext);
     const modalRef = useRef(null);
     const [feedbacks , setFeedbacks] = useState([]);
 
@@ -66,14 +95,14 @@ export default function ShowFullRequest({ request, setVisible }) {
     };
 
     return (
-        <div className="full-request-container" ref={modalRef}>
-        <div className="content">
+        <div className="full-request-container">
+        <div className="content"  ref={modalRef}>
             <span className="cross_btn" onClick={handleClose}>&times;</span>
             <h2 style={{color:"blue"}}>{request.title}</h2>
             <div className="request-details">
                 <div className="grid-container">
                     <div className="column">
-                        <p><strong>From:</strong> {request.from}</p>
+                        {loginUser.userInfo.role === 'admin' ? <p><strong>From:</strong> {request.from}</p> : <p><strong>To:</strong> {request.to}</p>}
                         <p><strong>Coordinator Name:</strong> {request.coordinatorName}</p>
                         <p><strong>Place:</strong> {request.place}</p>
                         <p><strong>Request Status:</strong> {request.reqStatus}</p>
@@ -92,7 +121,7 @@ export default function ShowFullRequest({ request, setVisible }) {
                 <div style={{marginTop:'20px' , display:'flex', flexDirection:'column'}}>
                     {
                         feedbacks.map((feedback) => (
-                            <ShowFeedback feedback = {feedback} />
+                            <ShowFeedback feedback = {feedback} getFeedbackData = {getFeedbackData} loginUser = {loginUser} req_id = {request._id}/>
                         ))
                     }
                 </div>

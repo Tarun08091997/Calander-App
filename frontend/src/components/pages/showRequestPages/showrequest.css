@@ -39,8 +39,6 @@
 }
 
 
-
-
 /* Div for Requests */
 .requestdiv{
     background-color: white;
@@ -56,6 +54,9 @@
 }
 .requestdiv *{
     margin: 5px;
+}
+.requestdiv .row1{
+    display: flex;
 }
 .requestdiv .row1 .school{
     font-size: 20px;
@@ -117,3 +118,8 @@
 
 }
 
+.requestdiv .exclamanation{
+    color:orange;
+    font-size: 50px;
+    margin: -15px 20px 0 auto;
+}
