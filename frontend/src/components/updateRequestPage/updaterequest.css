@@ -1,4 +1,4 @@
-.event-details{
+.update-event-details{
     position: absolute;
     width: 50%;
     height: 90%;
@@ -8,3 +8,41 @@
     border-radius: 10px;
     background-color: white;
 }
+
+.update-event-detail-text{
+    font-size: 30px;
+    width: 300px;
+    padding: 10px;
+}
+.update-event-details th{
+    font-size: 20px;
+    width: 300px;
+    padding: 10px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.update-event-details td input{
+    height: 25px;
+    width: 300px;
+    border: none;
+    font-size: 23px;
+    margin-left: 20px;
+    text-decoration: none;
+    outline: none;
+}
+
+.update-event-details td input:focus{
+    cursor: text;
+}
+
+.mt-4 button{
+    background-color:green;
+    color: white;
+    height: 40px;
+    width: 150px;
+    border: none;
+    margin-left: 250px;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+

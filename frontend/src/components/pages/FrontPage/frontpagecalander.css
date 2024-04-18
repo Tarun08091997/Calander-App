@@ -4,6 +4,7 @@
     height: 650px;
     padding:30px;
     width: 1400px;
+    margin-bottom: 100px;
     
 }
 
@@ -68,4 +69,9 @@
     font-size: 20px;
 }
 
-
+.calander-day{
+    background-color: red;
+}
+.calander-day:hover{
+    cursor: pointer;
+}

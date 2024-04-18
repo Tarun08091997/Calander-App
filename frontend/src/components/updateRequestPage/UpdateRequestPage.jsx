@@ -41,6 +41,8 @@ export default function UpdateRequestPage({request , setUpdateReq }) {
     }, [setUpdateReq]);
 
     const handleSubmit = async (e) => {
+      try{
+        e.preventDefault();
         const response= await axios.put(`http://localhost:4000/api/v1/${request._id}/UpdateRequest`, {
         title: aboutTheEvent,
         message: remarks,
@@ -48,12 +50,32 @@ export default function UpdateRequestPage({request , setUpdateReq }) {
         coordinatorName: eventCoordinator,
         CoordinatorNumber: eventCoordinatorContact,
         place:eventPlace,
-        vanue:eventVenue,
+        vanue:eventVenue
       });
-      console.log(response)
+      
+      if(response.data){
+        setPopmsg(["success", "Request Created",popmsg[2]+1]);
+      }
+      }
+      catch(error){
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          const { data } = error.response;
+          const errorMessage = data.message;
+          setPopmsg(["warning",errorMessage, popmsg[2] + 1]);
+        } else if (error.request) {
+          // The request was made but no response was received
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+      }
+      
     }
     return (
-        <div className="event-details" ref={modalRef}>
+        <div className="update-event-details" ref={modalRef}>
           <h1 className="event-detail-text">Event Details</h1>
     
           <form onSubmit={handleSubmit}>
@@ -142,16 +164,10 @@ export default function UpdateRequestPage({request , setUpdateReq }) {
                   />
                 </td>
               </tr>
-              <tr>
-                <th className="p-3">Select Guest </th>
-                <td>
-                    <DropDownComponent className="drop-down" setGuests={setGuests}/>
-                </td>
-              </tr>
             </table>
     
             <div className="mt-4">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" >
                 Update Requets
               </button>
             </div>

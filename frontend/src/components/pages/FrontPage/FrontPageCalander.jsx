@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './frontpagecalander.css'
 
-const CalanderDay=() =>{
-    return(
-        <div>
-            
+const CalanderDay = ({ day }) => {
+    // Here you can add your logic to display events or any other information for each day
+    return (
+        <div className='calander-day'>
+            {day}
         </div>
-    )
-}
+    );
+};
+
 const FrontPageCalander = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
 
@@ -36,13 +38,17 @@ const FrontPageCalander = () => {
         const startingDay = startingDayOfMonth(currentDate.getMonth(), currentDate.getFullYear());
         const calendar = [];
         let day = 1;
-        for (let i = 0; i < Math.ceil((startingDay+ days)/7); i++) {
+        for (let i = 0; i < Math.ceil((startingDay + days) / 7); i++) {
             const week = [];
             for (let j = 0; j < 7; j++) {
                 if ((i === 0 && j < startingDay) || day > days) {
                     week.push(<td key={`${i}-${j}`}></td>);
                 } else {
-                    week.push(<td key={`${i}-${j}`}>{day}</td>);
+                    week.push(
+                        <td key={`${i}-${j}`}>
+                            <CalanderDay key={day} day={day} />
+                        </td>
+                    );
                     day++;
                 }
             }
@@ -62,7 +68,6 @@ const FrontPageCalander = () => {
                     <button className="next btn" onClick={nextMonth}>Next Month</button>
                 </div>
             </div>
-
 
             <table className="calander-table">
                 <thead className="header">
