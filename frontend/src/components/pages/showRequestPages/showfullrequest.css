@@ -80,3 +80,17 @@
 .showfeedback .ok-button:hover {
     background-color: green;
 }
+
+.req-update-btn{
+    margin-left: 90%;
+    width: 70px;
+    height: 25px;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.req-update-btn:hover{
+    cursor: pointer;
+    background-color: tomato;
+}

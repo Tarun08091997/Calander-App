@@ -33,6 +33,7 @@ function ShowFeedback({ loginUser , feedback , getFeedbackData , req_id }) {
           }     
     } 
 
+    
     // Determine border and box shadow color based on feedback seen status
     const borderColor = feedback.seen ? 'green' : 'red';
     const boxShadowColor = feedback.seen ? 'rgba(0, 128, 0, 0.5)' : 'rgba(255, 0, 0, 0.5)';
@@ -52,10 +53,11 @@ function ShowFeedback({ loginUser , feedback , getFeedbackData , req_id }) {
     );
 }
 
-export default function ShowFullRequest({ request, setVisible }) {
+export default function ShowFullRequest({ request, setVisible , setUpdateReq }) {
     const { loginUser } = useContext(UserContext);
     const modalRef = useRef(null);
     const [feedbacks , setFeedbacks] = useState([]);
+    
 
     const getFeedbackData = async () => {
         try {
@@ -94,6 +96,11 @@ export default function ShowFullRequest({ request, setVisible }) {
         return date.toLocaleDateString('en-US', options);
     };
 
+    const handleUpdateBtn = () =>{
+        setVisible(false);
+        setUpdateReq(true);
+    }
+
     return (
         <div className="full-request-container">
         <div className="content"  ref={modalRef}>
@@ -121,13 +128,14 @@ export default function ShowFullRequest({ request, setVisible }) {
                 <div style={{marginTop:'20px' , display:'flex', flexDirection:'column'}}>
                     {
                         feedbacks.map((feedback) => (
-                            <ShowFeedback feedback = {feedback} getFeedbackData = {getFeedbackData} loginUser = {loginUser} req_id = {request._id}/>
+                            <ShowFeedback key = {feedback.id} feedback = {feedback} getFeedbackData = {getFeedbackData} loginUser = {loginUser} req_id = {request._id}/>
                         ))
                     }
                 </div>
-
-
+                {loginUser.userInfo.role === 'user' &&  <button onClick={handleUpdateBtn} className='req-update-btn'>Update</button>}
+                
         </div>
+        
     </div>
     );
 }

@@ -4,10 +4,11 @@ import axios from 'axios';
 import SendFeedbackDiv from './SendFeedbackDiv';
 import { FaExclamation } from "react-icons/fa";
 import ShowFullRequest from './ShowFullRequest';
+import UpdateRequestPage from '../../updateRequestPage/UpdateRequestPage';
 export default function RequestDiv({request , userRole , setBtnClicked }) {
   const [showFbdiv,setShowFbdiv] = useState(false);
   const [showReq,setShowReq] = useState(false);
-
+  const [updateReq , setUpdateReq] = useState(false);
   const handleAccept = async () => {
     setBtnClicked((prev)=>!prev);
     await axios.put(`http://localhost:4000/api/v1/${request._id}/AcceptRequest`);
@@ -69,7 +70,8 @@ export default function RequestDiv({request , userRole , setBtnClicked }) {
       </button>
       </div>}
       {showFbdiv && <SendFeedbackDiv request = {request._id} setVisible={setShowFbdiv} visible = {showFbdiv}/>}
-      {showReq && <ShowFullRequest request ={request} setVisible = {setShowReq}/>}
+      {showReq && <ShowFullRequest request ={request} setVisible = {setShowReq} setUpdateReq={setUpdateReq}/>}
+      {updateReq && <UpdateRequestPage request = {request} setUpdateReq={setUpdateReq}/>}
       
     </div>
   );

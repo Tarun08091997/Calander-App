@@ -93,8 +93,8 @@ exports.getAllRequests = async(req,res,next) =>{
 
 exports.updateRequest = async(req,res,next) =>{
     try{
-        const {title : newTitle , message :  newMassage , ceremonyDate : newDate} = req.body;
-        const updatedRequest = await requestModel.findByIdAndUpdate(req.params.id , {title : newTitle , message : newMassage , ceremonyDate : newDate} , {new : true});
+        const {title : newTitle , message :  newMassage , ceremonyDate : newDate , place:newPlace , vanue  : newVanue} = req.body;
+        const updatedRequest = await requestModel.findByIdAndUpdate(req.params.request , {title : newTitle , message :  newMassage , ceremonyDate : newDate , place:newPlace , vanue  : newVanue} , {new : true});
         if(!updatedRequest){
             return res.status(404).send({message : "Error while updating request"})
         }
@@ -199,3 +199,4 @@ exports.decreasePendingFeedback = async (req, res, next) => {
         return res.status(500).send({ message: "Failed to update request", error: error.message });
     }
 };
+

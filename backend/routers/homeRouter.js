@@ -1,5 +1,5 @@
 const { createFeedback, getFeedback, feedbackSeen } = require('../controller/feedbackController');
-const { createReq, getAllRequests, SaveReq, deleteSavedRequest, acceptRequest, rejectRequest, increasePendingFeedback, decreasePendingFeedback } = require('../controller/requestController');
+const { createReq, getAllRequests, SaveReq, deleteSavedRequest, acceptRequest, rejectRequest, increasePendingFeedback, decreasePendingFeedback, updateRequest } = require('../controller/requestController');
 const { getUserSentRequests, getUserRecRequests, getUserSavedRequests } = require('../controller/userController');
 
 const home_router = require('express').Router();
@@ -14,5 +14,6 @@ home_router.route("/:request/RejectRequest").put(rejectRequest);
 home_router.route("/:request/CreateFeedback").post(createFeedback);
 home_router.route("/:request/GetFeedback").get(getFeedback);
 home_router.route("/:request/decreasePendingFeedback").put(decreasePendingFeedback);
+home_router.route("/:request/UpdateRequest").put(updateRequest);
 home_router.route("/:feedback/FeedbackSeen").put(feedbackSeen);
 module.exports = home_router;

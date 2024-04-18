@@ -34,6 +34,7 @@ const CreateRequestPage = () => {
         reqStatus: 'pending',
         coordinatorName: eventCoordinator,
         CoordinatorNumber: eventCoordinatorContact,
+        place:eventPlace,
         vanue:eventVenue,
         saved: false
       });
