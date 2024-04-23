@@ -30,6 +30,9 @@ export default function RequestDiv({request , userRole , setBtnClicked }) {
       <div className='row1' onClick={()=>setShowReq(true)}>
         <span className='school'>{userRole === "admin" ? request.from : request.to}</span>
         <span className='event'>{request.title}</span>
+        {request.reqStatus === "pending" && <span style={{marginLeft : '40%' , fontSize:'20px' , fontWeight:'600' , color:'#fb8500'}}>Pending</span>}
+        {request.reqStatus === "accepted" && <span style={{marginLeft : '40%' , fontSize:'20px' , fontWeight:'600', color:'green'}}>Accepted</span>}
+        {request.reqStatus === "canceled" && <span style={{marginLeft : '40%' , fontSize:'20px' , fontWeight:'600', color:'red'}}>Rejected</span>}
         {request.pendingFeedback > 0 ? <FaExclamation className='exclamanation'/> : null}
       </div>
 
@@ -43,7 +46,7 @@ export default function RequestDiv({request , userRole , setBtnClicked }) {
 
       {/* Third Row */}
       <div className='row3' onClick={()=>setShowReq(true)}>
-        <span className='details'>{request.message}</span>
+        <span>Details : </span><span className='details'>{request.message}</span>
       </div>
 
       {/* Fourth Row */}

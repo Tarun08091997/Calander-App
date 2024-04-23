@@ -1,5 +1,5 @@
 const { createFeedback, getFeedback, feedbackSeen } = require('../controller/feedbackController');
-const { createReq, getAllRequests, SaveReq, deleteSavedRequest, acceptRequest, rejectRequest, decreasePendingFeedback, updateRequest, getAllTypesRequest, getRequestsByDate } = require('../controller/requestController');
+const { createReq, getAllRequests, SaveReq, deleteSavedRequest, acceptRequest, rejectRequest, decreasePendingFeedback, updateRequest, getAllTypesRequest, getRequestsByDate, getAllTypesRequestbyUser } = require('../controller/requestController');
 const { getUserSentRequests, getUserRecRequests, getUserSavedRequests } = require('../controller/userController');
 
 const home_router = require('express').Router();
@@ -7,6 +7,7 @@ const home_router = require('express').Router();
 home_router.route("/:username/CreateRequest").post(createReq);
 home_router.route("/getAllRequests").get(getAllRequests);
 home_router.route("/getAllTypesRequest").get(getAllTypesRequest);
+home_router.route("/:username/getAllTypesRequestbyUser").get(getAllTypesRequestbyUser);
 
 home_router.route("/:username/sentRequests").get(getUserSentRequests);
 home_router.route("/:username/RecRequests").get(getUserRecRequests);

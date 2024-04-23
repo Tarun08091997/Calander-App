@@ -119,6 +119,46 @@ exports.getAllTypesRequest = async (req, res, next) => {
     }
 };
 
+
+exports.getAllTypesRequestbyUser = async (req, res, next) => {
+    try {
+        const user = await userModel.findOne({"username":req.params.username});
+        if(!user){
+            return res.status(404).send({ message: "From user not found" });
+        }
+        let responseData = {};
+        if(user.role === "user"){
+            const pendingRequests = await requestModel.find({ reqStatus: "pending" , from : user.username});
+            const acceptedRequests = await requestModel.find({ reqStatus: "accepted" , from : user.username });
+            const rejectedRequests = await requestModel.find({ reqStatus: "canceled" , from : user.username});
+            responseData = {
+                pendingRequests: pendingRequests || [],
+                acceptedRequests: acceptedRequests || [],
+                rejectedRequests: rejectedRequests || []
+            };
+        }else{
+            const pendingRequests = await requestModel.find({ reqStatus: "pending" , to : user.username});
+            const acceptedRequests = await requestModel.find({ reqStatus: "accepted" , to : user.username });
+            const rejectedRequests = await requestModel.find({ reqStatus: "canceled" , to : user.username});
+            responseData = {
+                pendingRequests: pendingRequests || [],
+                acceptedRequests: acceptedRequests || [],
+                rejectedRequests: rejectedRequests || []
+            };
+        }
+        
+
+        
+
+        res.status(200).send(responseData);
+    } catch (error) {
+        res.status(500).send({
+            message: "Failed to retrieve requests",
+            error: error.message
+        });
+    }
+};
+
 exports.updateRequest = async(req,res,next) =>{
     try{
         const {title : newTitle , message :  newMassage , ceremonyDate : newDate , ceremonyTime : newTime , place:newPlace , vanue  : newVanue , coordinatorName: newCName , CoordinatorNumber: newCNumber} = req.body;

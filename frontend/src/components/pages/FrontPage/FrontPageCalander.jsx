@@ -1,25 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './frontpagecalander.css'
 import axios from 'axios'
-const CalanderDay = ({ day , pending , accepted , rejected}) => {
-
-    // function hasResponseWithDate(responseArray, targetDate) {
-    //     const targetISODate = targetDate.toISOString().split('T')[0];
-    //     // Iterate over each response in the array
-    //     for (const response of responseArray) {
-    //         console.log(response.ceremonyDate , "       ->>>      " , targetDate);
-    //         // Extract the ceremony date from the response
-    //         const ceremonyDateISO = new Date(response.ceremonyDate).toISOString().split('T')[0];     
-    //         console.log(ceremonyDateISO , "    - >>>" , targetISODate)      
-    //         // Compare the ceremony date with the target date
-    //         if (ceremonyDateISO === targetISODate) {
-    //             // If the dates match, return true
-    //             return true;
-    //         }
-    //     }
-    //     // If no match is found, return false
-    //     return false;
-    // }
+import { UserContext } from '../../../contexts/UserContext';
+import ShowRequestsByDate from './ShowRequestsByDate';
+const CalanderDay = ({ day , pending , accepted , rejected , showRequestsbyDate , allRequestbyDay}) => {
 
     const classname = () =>{
         if(pending.def && !accepted.def){
@@ -31,26 +15,23 @@ const CalanderDay = ({ day , pending , accepted , rejected}) => {
 
         return 'calander-day';
     }
+
+    const closeRequestWindow = ()=>{
+        allRequestbyDay([...pending.arr , ...accepted.arr , ...rejected.arr]);
+        showRequestsbyDate(true);
+    }
     return (
-        <div className= {classname} onClick={ () =>
-            console.log(pending)
-        }>
-            <span>{day}</span>
-            <div className='pending-div'>
-                {pending.arr.map((item)=>(
-                    <span key={item._id}>{item.title}</span>
-                ))}
-            </div>
-            <div className='accepted-div'>
-                {accepted.arr.map((item)=>(
-                        <span key={item._id}>{item.title}</span>
-                    ))}
-            </div>
-            <div className='rejected-div'>
-                {rejected.arr.map((item)=>(
-                        <span key={item._id}>{item.title}</span>
-                    ))}
-            </div>
+        <div className= {classname()} onClick={closeRequestWindow}>
+            <h4>{day}</h4>
+            {pending.def && <div>
+                <span style = {{color:'blue'}} >Pending : </span> <span>{pending.arr.length}</span>   
+            </div>}
+            {accepted.def && <div>
+                <span style = {{color:'green'}} >Accepted : </span> <span>{accepted.arr.length}</span>   
+            </div>}
+            {rejected.def && <div>
+                <span style = {{color:'red'}} >Rejected : </span> <span>{rejected.arr.length}</span>   
+            </div>}
         </div>
     );
 };
@@ -60,12 +41,18 @@ const FrontPageCalander = () => {
     const [acceptedEventList , setAcceptedEventList] = useState([]);
     const [rejectedEventList , setRejectedEventList] = useState([]);
     const [pendingEventList , setPendingEventList] = useState([]);
+    const {loginUser} = useContext(UserContext);
+
+    const [showRequestsbyDate , setShowRequestsByDate] = useState(false);
+    const [allRequestbyDay , setAllRequestByDate] = useState([]);
 
     const getdata = async () =>{
-        const response = await axios.get("http://localhost:4000/api/v1/getAllTypesRequest");
-        setAcceptedEventList(response.data.acceptedRequests);
-        setRejectedEventList(response.data.rejectedRequests);
-        setPendingEventList(response.data.pendingRequests);
+        if(loginUser.isLoggedIn){
+            const response = await axios.get(`http://localhost:4000/api/v1/${loginUser.userInfo.username}/getAllTypesRequestbyUser`);
+            setAcceptedEventList(response.data.acceptedRequests);
+            setRejectedEventList(response.data.rejectedRequests);
+            setPendingEventList(response.data.pendingRequests);
+        }
     }
 
     function hasResponseWithDate(responseArray, targetDate) {
@@ -89,7 +76,7 @@ const FrontPageCalander = () => {
 
     useEffect(()=>{
         getdata();
-    },[])
+    },[loginUser.isLoggedIn])
 
 
     const daysInMonth = (month, year) => {
@@ -135,7 +122,8 @@ const FrontPageCalander = () => {
                     // Push the CalendarDay component to the week array
                     week.push(
                         <td key={`${i}-${j}`}>
-                            <CalanderDay key={currentDay} day={currentDay} pending={pendingEventOnDay}  accepted = {acceptedEventOnDay} rejected = {rejectedEventOnDay}/>
+                            {loginUser.isLoggedIn ?  <CalanderDay key={currentDay} day={currentDay} pending={pendingEventOnDay}  accepted = {acceptedEventOnDay} rejected = {rejectedEventOnDay} showRequestsbyDate ={setShowRequestsByDate} allRequestbyDay ={setAllRequestByDate}/>
+                            : <div>{currentDay}</div>}
                         </td>
                     );
                     // Increment the day counter
@@ -178,6 +166,7 @@ const FrontPageCalander = () => {
                 </thead>
                 <tbody>{renderCalendar()}</tbody>
             </table>
+            {showRequestsbyDate && <ShowRequestsByDate showRequestsbyDate ={setShowRequestsByDate} allRequestbyDay = {allRequestbyDay} loginUser={loginUser}/>}
         </div>
     );
 };
