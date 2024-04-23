@@ -116,9 +116,10 @@ export default function ShowFullRequest({ request, setVisible , setUpdateReq }) 
                     </div>
                     <div className="column">
                         <p><strong>Ceremony Date:</strong> <span style={{color:"red"}}>{formatDateString(request.ceremonyDate)}</span></p>
+                        <p><strong>Ceremony Time:</strong> <span style={{color:"green"}}>{request.ceremonyTime}</span></p>
                         <p><strong>Coordinator Number:</strong> {request.CoordinatorNumber}</p>
                         <p><strong>Venue:</strong> {request.vanue}</p>
-                        <p><strong>Request Date:</strong> {formatDateString(request.ceremonyDate)}</p>
+                        <p><strong>Request Date:</strong> {formatDateString(request.reqDate)}</p>
                     </div>
                 </div>
                 <div className="message">

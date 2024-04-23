@@ -29,7 +29,8 @@ const CreateRequestPage = () => {
         to: guests,
         title: aboutTheEvent,
         message: remarks,
-        ceremonyDate: new Date(eventDate + ' ' + eventTime), // Assuming eventDate and eventTime are in appropriate formats
+        ceremonyDate: new Date(eventDate), // Assuming eventDate and eventTime are in appropriate formats
+        ceremonyTime : eventTime+"",
         reqDate: new Date(),
         reqStatus: 'pending',
         coordinatorName: eventCoordinator,

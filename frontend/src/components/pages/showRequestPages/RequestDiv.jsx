@@ -36,7 +36,7 @@ export default function RequestDiv({request , userRole , setBtnClicked }) {
       {/* Second Row */}
       <div className='row2' onClick={()=>setShowReq(true)}>
         <span className='date'>Date: {new Date(request.ceremonyDate).toDateString()}</span>
-        <span className='time'>Time: {new Date(request.ceremonyDate).toLocaleTimeString([],{ hour: '2-digit', minute: '2-digit' })}</span>
+        <span className='time'>Time: {request.ceremonyTime}</span>
         <span className='place'>Place: {request.place}</span>
         <span className='vanue'>Vanue: {request.vanue}</span>
       </div>

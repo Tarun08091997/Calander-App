@@ -6,6 +6,11 @@ exports.createReq = async (req, res, next) => {
         const req_body = req.body;
         const fromUsername = req.params.username;
 
+        const existing_req = await requestModel.findOne({title : req_body.title});
+        if(existing_req){
+            return res.status(400).send({message : "Request Already Exists"})
+        }
+
         const fromUser = await userModel.findOne({ "username": fromUsername });
         if (!fromUser) {
             return res.status(404).send({ message: "From user not found" });
@@ -82,7 +87,9 @@ exports.SaveReq = async (req,res,next) => {
 exports.getAllRequests = async(req,res,next) =>{
     try {
         const all_requests= await requestModel.find();
-        res.status(200).send(all_requests);
+        if(all_requests)
+            return res.status(200).send(all_requests);
+        return res.status(400).send({message:"No request found"})
     } catch(error) {
         res.status(500).send({
             message: "Failed to retrieve requests",
@@ -91,14 +98,36 @@ exports.getAllRequests = async(req,res,next) =>{
     }
 }
 
+exports.getAllTypesRequest = async (req, res, next) => {
+    try {
+        const pendingRequests = await requestModel.find({ reqStatus: "pending" });
+        const acceptedRequests = await requestModel.find({ reqStatus: "accepted" });
+        const rejectedRequests = await requestModel.find({ reqStatus: "canceled" });
+
+        const responseData = {
+            pendingRequests: pendingRequests || [],
+            acceptedRequests: acceptedRequests || [],
+            rejectedRequests: rejectedRequests || []
+        };
+
+        res.status(200).send(responseData);
+    } catch (error) {
+        res.status(500).send({
+            message: "Failed to retrieve requests",
+            error: error.message
+        });
+    }
+};
+
 exports.updateRequest = async(req,res,next) =>{
     try{
-        const {title : newTitle , message :  newMassage , ceremonyDate : newDate , place:newPlace , vanue  : newVanue} = req.body;
-        const updatedRequest = await requestModel.findByIdAndUpdate(req.params.request , {title : newTitle , message :  newMassage , ceremonyDate : newDate , place:newPlace , vanue  : newVanue} , {new : true});
+        const {title : newTitle , message :  newMassage , ceremonyDate : newDate , ceremonyTime : newTime , place:newPlace , vanue  : newVanue , coordinatorName: newCName , CoordinatorNumber: newCNumber} = req.body;
+        const updatedRequest = await requestModel.findByIdAndUpdate(req.params.request , {title : newTitle , message :  newMassage , ceremonyDate : newDate , place:newPlace , ceremonyTime : newTime , vanue  : newVanue , coordinatorName: newCName , CoordinatorNumber: newCNumber} , {new : true});
+        console.log(updatedRequest)
         if(!updatedRequest){
             return res.status(404).send({message : "Error while updating request"})
         }
-
+        
         return res.status(200).send(updatedRequest);
     }catch(err){
         res.status(500).send({
@@ -199,4 +228,6 @@ exports.decreasePendingFeedback = async (req, res, next) => {
         return res.status(500).send({ message: "Failed to update request", error: error.message });
     }
 };
+
+
 

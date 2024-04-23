@@ -21,6 +21,9 @@ const requestSchema = mongo.Schema({
         type : Date,
         required : true
     },
+    'ceremonyTime':{
+        type:String
+    },
     'reqDate':{
         type : Date,
         default: Date.now,
