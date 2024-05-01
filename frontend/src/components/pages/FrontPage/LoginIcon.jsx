@@ -48,7 +48,7 @@ export default function LoginIcon({ setShowLoginIcon }) {
   else{
     if(loginUser.userInfo.role === "admin"){
         return(
-          <UserDataChange/>
+          <UserDataChange onClose={handleOutsideClick}/>
         )
     }
     else{

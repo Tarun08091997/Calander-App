@@ -1,14 +1,11 @@
-
-.calander-container{
+.calander-container {
     background-color: #f0f0f0;
-    height: 650px;
-    padding:30px;
-    width: 1400px;
-    margin-bottom: 100px;
-    
+    padding: 20px;
+    width: 100%; /* Adjusted for responsiveness */
+    margin-bottom: 50px; /* Adjusted for responsiveness */
 }
 
-.calendar-header{
+.calendar-header {
     display: flex;
     height: 75px;
     background-color: #3498db;
@@ -19,31 +16,31 @@
     justify-content: space-between;
 }
 
-.calendar-header .text-header{
-    margin-left: 50px;
+.calendar-header .text-header {
+    margin-left: 10%; /* Adjusted for responsiveness */
     color: #ffffff;
-    font-size:30px;
+    font-size: 24px; /* Adjusted for responsiveness */
     font-family: Arial, sans-serif;
 }
 
-.calander-container .calendar-buttons{
-    margin-right: 50px;
+.calander-container .calendar-buttons {
+    margin-right: 10%; /* Adjusted for responsiveness */
     display: flex;
 }
 
-.calander-container .calendar-buttons *{
-    margin-right: 30px;
-    width: 130px;
-    height: 40px;
-    font-size:15px;
+.calander-container .calendar-buttons * {
+    margin-right: 15px;
+    width: 100px; /* Adjusted for responsiveness */
+    height: 35px; /* Adjusted for responsiveness */
+    font-size: 14px; /* Adjusted for responsiveness */
     font-family: Arial, sans-serif;
     background-color: white;
-    font-weight:545;
+    font-weight: 545;
     border: 0px;
-    border-radius: 10px;   
+    border-radius: 10px;
 }
 
-.calander-container .calendar-buttons *:hover{
+.calander-container .calendar-buttons *:hover {
     background-color: #f0f0f0;
     transition: background-color ease-in-out 0.3s;
     cursor: pointer;
@@ -53,26 +50,23 @@
     border-collapse: separate;
     border-spacing: 2px;
     width: 100%;
-    height: 100%;
 }
 
-.calander-table .header *{
+.calander-table .header * {
     background-color: #3498db;
     color: white;
-    
-    
 }
 
 .calander-table th,
 .calander-table td {
     background-color: white;
-    padding: 10px;
+    padding: 8px; /* Adjusted for responsiveness */
     text-align: center;
-    font-size: 20px;
+    font-size: 16px; /* Adjusted for responsiveness */
 }
 
-.calander-day{
-    width: 90%;
+.calander-day {
+    width: 80%; /* Adjusted for responsiveness */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -80,26 +74,59 @@
     justify-content: center;
     flex-grow: 0;
     flex-shrink: 0;
-    overflow:hidden;
+    overflow: hidden;
 }
-.calander-day:hover{
+
+.calander-day:hover {
     cursor: pointer;
 }
 
-.calander-day span{
- font-size: 15px;
+.calander-day span {
+    font-size: 14px; /* Adjusted for responsiveness */
 }
 
-.req-pending{
+.req-pending {
     border: 2px solid yellow;
     box-shadow: 1px 1px 2px 2px yellow;
     border-radius: 10px;
     background-color: rgba(176, 212, 44, 0.2);
 }
 
-.req-clash{
+.req-clash {
     border: 2px solid red;
     box-shadow: 2px 2px 10px 5px red;
     border-radius: 10px;
-    background-color: rgba(255,0,0,0.2);
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+/* Media Queries for Mobile Devices */
+@media only screen and (max-width: 768px) {
+    .calendar-header .text-header {
+        margin-left: 5%; /* Adjusted for responsiveness */
+        font-size: 20px; /* Adjusted for responsiveness */
+    }
+
+    .calander-container .calendar-buttons {
+        margin-right: 5%; /* Adjusted for responsiveness */
+    }
+
+    .calander-container .calendar-buttons * {
+        width: 80px; /* Adjusted for responsiveness */
+        height: 30px; /* Adjusted for responsiveness */
+        font-size: 12px; /* Adjusted for responsiveness */
+    }
+
+    .calander-table th,
+    .calander-table td {
+        padding: 6px; /* Adjusted for responsiveness */
+        font-size: 14px; /* Adjusted for responsiveness */
+    }
+
+    .calander-day span {
+        font-size: 12px; /* Adjusted for responsiveness */
+    }
+
+    .calander-day {
+        width: 70%; /* Adjusted for responsiveness */
+    }
 }

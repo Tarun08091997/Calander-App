@@ -48,8 +48,7 @@ exports.getAllAdminNames = async (req,res,next) => {
 
 exports.getUserByUsernames = async (req,res,next) =>{
     try{
-        const b = await req.body;
-        const login_user = await userModel.findOne({"username" : b.username});
+        const login_user = await userModel.findOne({"username" : req.params.username});
         if(!login_user){
             return res.status(404).send({ message: "User not found" });
         }
