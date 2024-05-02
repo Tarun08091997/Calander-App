@@ -15,13 +15,28 @@
     background-color: tomato;
 }
 
+/* Media query for screens smaller than 600px */
+@media (max-width: 600px) {
+  .selected-options-div {
+      height: 25px;
+      font-size: 16px;
+  }
+}
+
+/* Media query for screens smaller than 400px */
+@media (max-width: 400px) {
+  .selected-options-div {
+      height: 20px;
+      font-size: 14px;
+  }
+}
+
 .user_dropdown{
   border: 1px solid black;
-  border-radius: 5px;
-  padding: 3px;
+  border-radius: 10px;
   margin: 15px 5px 5px 5px;
-  height: 30px;
   font-size: 20px;
   box-shadow: 3px 5px 6px 5px rgba(0, 0, 0, 0.3);
+  height: 20px;
 
 }

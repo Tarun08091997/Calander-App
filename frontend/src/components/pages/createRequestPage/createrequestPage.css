@@ -34,3 +34,47 @@
     border-radius: 20px;
     margin-top: 30px;
 }
+.user_dropdown{
+    height: 45px;
+}
+/* Media query for screens smaller than 600px */
+@media (max-width: 600px) {
+    .event-detail-text {
+        font-size: 18px;
+    }
+
+    .event-details th {
+        font-size: 16px;
+    }
+
+    .event-details td input {
+        font-size: 18px;
+    }
+
+    .mt-4 button {
+        margin-top: 15px;
+    }
+    .user_dropdown{
+        height: 40px;
+        font-size: 15px;
+    }
+}
+
+/* Media query for screens smaller than 400px */
+@media (max-width: 400px) {
+    .event-detail-text {
+        font-size: 16px;
+    }
+
+    .event-details th {
+        font-size: 14px;
+    }
+
+    .event-details td input {
+        font-size: 16px;
+    }
+
+    .mt-4 button {
+        margin-top: 10px;
+    }
+}

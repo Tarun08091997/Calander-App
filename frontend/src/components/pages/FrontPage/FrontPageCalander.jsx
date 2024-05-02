@@ -3,6 +3,9 @@ import './frontpagecalander.css'
 import axios from 'axios'
 import { UserContext } from '../../../contexts/UserContext';
 import ShowRequestsByDate from './ShowRequestsByDate';
+const api = process.env.API_LINK;
+
+
 const CalanderDay = ({ day , pending , accepted , rejected , showRequestsbyDate , allRequestbyDay}) => {
 
     const classname = () =>{
@@ -76,6 +79,7 @@ const FrontPageCalander = () => {
 
     useEffect(()=>{
         getdata();
+        console.log(api);
     },[loginUser.isLoggedIn])
 
 
